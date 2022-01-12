@@ -38,12 +38,18 @@ this.handleClear=this.handleClear.bind(this)
 }
 
   handleOne(event) {
+    console.log(this.state.inputs.indexOf("="))
+    if ((this.state.inputs.indexOf("="))>=0) {
+      handleClear}
+      else {
       this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
       currentDisplay: state.currentDisplay + event.target.value,
       operation: state.operation + event.target.value,
     }));
+  
+      }
   }
 
   handleTwo(event) {
@@ -175,7 +181,7 @@ this.handleClear=this.handleClear.bind(this)
      currentDisplay: answer,
      operation: answer,
      runningDisplay: this.state.inputs,
-     inputs: [answer]
+    inputs: [answer]//If you remove this, the runningDisplay keeps going
     }));
   }
 

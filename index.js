@@ -32,6 +32,10 @@ this.handleClear=this.handleClear.bind(this)
 
 
   handleZero(event) {
+    if (this.state.inputs.indexOf("0")>=0) {
+      return
+    }
+    else {
     this.state.inputs.push(event.target.value)
   this.setState(state => ({
     runningDisplay: this.state.inputs,
@@ -39,6 +43,7 @@ this.handleClear=this.handleClear.bind(this)
     operation: state.operation + event.target.value,
   }));
 }
+  }
 
   handleOne(event) {
        if (this.state.operated) {
@@ -231,7 +236,10 @@ this.handleClear=this.handleClear.bind(this)
 }
 
   handleDecimal(event) {
-    let regex= /\.(\d+)|(\d+)\.(\d+)\+|\-|\*|\//
+    // let regex= /((\.(\d+))|((\d+)\.(\d+)))\+|(\-|\*|\/)$/
+    let regex= /(\+|\-|\*|\/)$|((\+|\-|\*|\/)\d+)$/
+    let teststring= "0.56-45"
+    console.log(regex.test(teststring))
     if (this.state.operated) {
       this.setState ({
      inputs: ["."],
@@ -243,7 +251,7 @@ this.handleClear=this.handleClear.bind(this)
  });
  }
    else {
-    if (this.state.inputs.indexOf(".")<0 || regex.test(this.state.inputs)) {
+    if (this.state.inputs.indexOf(".")<0) {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -252,13 +260,26 @@ this.handleClear=this.handleClear.bind(this)
     }));
   }
   else if (this.state.inputs.indexOf(".")>0)  {
-    regex.test(this.state.inputs)
+   
+    if(regex.test(this.state.operation)) {
+      this.state.inputs.push(event.target.value)
+      this.setState(state => ({
+        runningDisplay: this.state.inputs,
+        currentDisplay: state.currentDisplay + event.target.value,
+        operation: state.operation + event.target.value
+      }));
+    }
+    else return
   }
   else return
   }
 }
 
   handlePlus(event) {
+    if (this.state.inputs[this.state.inputs.length-1]==="+") {
+      return
+    }
+   else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -267,6 +288,7 @@ this.handleClear=this.handleClear.bind(this)
       operated: false
     }));
   }
+}
 
 
   handleMinus(event) {

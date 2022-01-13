@@ -7,7 +7,8 @@ this.state={
   defaultDisplay: "0",
   runningDisplay: "",
   currentDisplay: "",
-  operation: ""
+  operation: "",
+  operated: false
 }
 this.handleZero=this.handleZero.bind(this)
 this.handleOne=this.handleOne.bind(this)
@@ -28,6 +29,8 @@ this.handleDivide=this.handleDivide.bind(this)
 this.handleClear=this.handleClear.bind(this)
   }
 
+
+
   handleZero(event) {
     this.state.inputs.push(event.target.value)
   this.setState(state => ({
@@ -38,9 +41,16 @@ this.handleClear=this.handleClear.bind(this)
 }
 
   handleOne(event) {
-    console.log(this.state.inputs.indexOf("="))
-    if ((this.state.inputs.indexOf("="))>=0) {
-      handleClear}
+       if (this.state.operated) {
+         this.setState ({
+        inputs: [1],
+        defaultDisplay: "0",
+        runningDisplay: "1",
+        currentDisplay: "1",
+        operation: "1",
+        operated: false
+    });
+    }
       else {
       this.state.inputs.push(event.target.value)
     this.setState(state => ({
@@ -53,6 +63,17 @@ this.handleClear=this.handleClear.bind(this)
   }
 
   handleTwo(event) {
+    if (this.state.operated) {
+      this.setState ({
+     inputs: [2],
+     defaultDisplay: "0",
+     runningDisplay: "2",
+     currentDisplay: "2",
+     operation: "2",
+     operated: false
+ });
+ }
+   else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -60,8 +81,19 @@ this.handleClear=this.handleClear.bind(this)
       operation: state.operation + event.target.value
     }));
   }
-
+  }
   handleThree(event) {
+    if (this.state.operated) {
+      this.setState ({
+     inputs: [3],
+     defaultDisplay: "0",
+     runningDisplay: "3",
+     currentDisplay: "3",
+     operation: "3",
+     operated: false
+ });
+ }
+   else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -69,8 +101,20 @@ this.handleClear=this.handleClear.bind(this)
       operation: state.operation + event.target.value
     }));
   }
+}
 
   handleFour(event) {
+    if (this.state.operated) {
+      this.setState ({
+     inputs: [4],
+     defaultDisplay: "0",
+     runningDisplay: "4",
+     currentDisplay: "4",
+     operation: "4",
+     operated: false
+ });
+ }
+   else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -78,8 +122,20 @@ this.handleClear=this.handleClear.bind(this)
       operation: state.operation + event.target.value
     }));
   }
+}
 
   handleFive(event) {
+    if (this.state.operated) {
+      this.setState ({
+     inputs: [5],
+     defaultDisplay: "0",
+     runningDisplay: "5",
+     currentDisplay: "5",
+     operation: "5",
+     operated: false
+ });
+ }
+   else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -87,8 +143,20 @@ this.handleClear=this.handleClear.bind(this)
       operation: state.operation + event.target.value
     }));
   }
+}
 
   handleSix(event) {
+    if (this.state.operated) {
+      this.setState ({
+     inputs: [6],
+     defaultDisplay: "0",
+     runningDisplay: "6",
+     currentDisplay: "6",
+     operation: "6",
+     operated: false
+ });
+ }
+   else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -96,8 +164,20 @@ this.handleClear=this.handleClear.bind(this)
       operation: state.operation + event.target.value
     }));
   }
+}
 
   handleSeven(event) {
+    if (this.state.operated) {
+      this.setState ({
+     inputs: [7],
+     defaultDisplay: "0",
+     runningDisplay: "7",
+     currentDisplay: "7",
+     operation: "7",
+     operated: false
+ });
+ }
+   else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -105,8 +185,21 @@ this.handleClear=this.handleClear.bind(this)
       operation: state.operation + event.target.value
     }));
   }
+}
 
   handleEight(event) {
+    if (this.state.operated) {
+      this.setState ({
+     inputs: [8],
+     defaultDisplay: "0",
+     runningDisplay: "8",
+     currentDisplay: "8",
+     operation: "8",
+     operated: false
+ });
+ }
+
+   else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -114,8 +207,20 @@ this.handleClear=this.handleClear.bind(this)
       operation: state.operation + event.target.value
     }));
   }
+}
   
   handleNine(event) {
+    if (this.state.operated) {
+      this.setState ({
+     inputs: [9],
+     defaultDisplay: "0",
+     runningDisplay: "9",
+     currentDisplay: "9",
+     operation: "9",
+     operated: false
+ });
+ }
+   else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -123,25 +228,43 @@ this.handleClear=this.handleClear.bind(this)
       operation: state.operation + event.target.value
     }));
   }
+}
 
   handleDecimal(event) {
-    if (this.state.inputs[this.state.inputs.length-1]!=".") {
+    let regex= /\.(\d+)|(\d+)\.(\d+)\+|\-|\*|\//
+    if (this.state.operated) {
+      this.setState ({
+     inputs: ["."],
+     defaultDisplay: "0",
+     runningDisplay: ".",
+     currentDisplay: ".",
+     operation: ".",
+     operated: false
+ });
+ }
+   else {
+    if (this.state.inputs.indexOf(".")<0 || regex.test(this.state.inputs)) {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
       currentDisplay: state.currentDisplay + event.target.value,
       operation: state.operation + event.target.value
     }));
+  }
+  else if (this.state.inputs.indexOf(".")>0)  {
+    regex.test(this.state.inputs)
   }
   else return
   }
+}
 
   handlePlus(event) {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
       currentDisplay: event.target.value,
-      operation: state.operation + event.target.value
+      operation: state.operation + event.target.value,
+      operated: false
     }));
   }
 
@@ -151,7 +274,8 @@ this.handleClear=this.handleClear.bind(this)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
       currentDisplay: event.target.value,
-      operation: state.operation + event.target.value
+      operation: state.operation + event.target.value,
+      operated: false
     }));
   }
 
@@ -160,7 +284,8 @@ this.handleClear=this.handleClear.bind(this)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
       currentDisplay: event.target.value,
-      operation: state.operation + event.target.value
+      operation: state.operation + event.target.value,
+      operated: false
     }));
   }
 
@@ -169,7 +294,8 @@ this.handleClear=this.handleClear.bind(this)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
       currentDisplay: event.target.value,
-      operation: state.operation + event.target.value
+      operation: state.operation + event.target.value,
+      operated: false
     }));
   }
 
@@ -181,17 +307,19 @@ this.handleClear=this.handleClear.bind(this)
      currentDisplay: answer,
      operation: answer,
      runningDisplay: this.state.inputs,
-    inputs: [answer]//If you remove this, the runningDisplay keeps going
+    inputs: [answer],
+    operated: true//If you remove this, the runningDisplay keeps going
     }));
   }
 
   handleClear() {
     this.setState({
-      inputs: [],
+  inputs: [],
   defaultDisplay: "0",
   runningDisplay: "",
-  currentDisplay: "0",
-  operation: ""
+  currentDisplay: "",
+  operation: "",
+  operated: false
     });
   }
 

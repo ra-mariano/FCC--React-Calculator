@@ -32,9 +32,19 @@ this.handleClear=this.handleClear.bind(this)
 
 
   handleZero(event) {
-    if (this.state.inputs.indexOf("0")>=0) {
+    if (this.state.inputs.indexOf("0")>=0||this.state.currentDisplay ==="0") {
       return
     }
+   else if (this.state.operated) {
+      this.setState ({
+     inputs: [0],
+     defaultDisplay: "0",
+     runningDisplay: "0",
+     currentDisplay: "0",
+     operation: "0",
+     operated: false
+ });
+ }
     else {
     this.state.inputs.push(event.target.value)
   this.setState(state => ({
@@ -46,7 +56,7 @@ this.handleClear=this.handleClear.bind(this)
   }
 
   handleOne(event) {
-       if (this.state.operated) {
+       if (this.state.operated||this.state.currentDisplay ==="0") {
          this.setState ({
         inputs: [1],
         defaultDisplay: "0",
@@ -68,7 +78,7 @@ this.handleClear=this.handleClear.bind(this)
   }
 
   handleTwo(event) {
-    if (this.state.operated) {
+    if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [2],
      defaultDisplay: "0",
@@ -88,7 +98,7 @@ this.handleClear=this.handleClear.bind(this)
   }
   }
   handleThree(event) {
-    if (this.state.operated) {
+    if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [3],
      defaultDisplay: "0",
@@ -109,7 +119,7 @@ this.handleClear=this.handleClear.bind(this)
 }
 
   handleFour(event) {
-    if (this.state.operated) {
+    if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [4],
      defaultDisplay: "0",
@@ -130,7 +140,7 @@ this.handleClear=this.handleClear.bind(this)
 }
 
   handleFive(event) {
-    if (this.state.operated) {
+    if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [5],
      defaultDisplay: "0",
@@ -151,7 +161,7 @@ this.handleClear=this.handleClear.bind(this)
 }
 
   handleSix(event) {
-    if (this.state.operated) {
+    if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [6],
      defaultDisplay: "0",
@@ -172,7 +182,7 @@ this.handleClear=this.handleClear.bind(this)
 }
 
   handleSeven(event) {
-    if (this.state.operated) {
+    if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [7],
      defaultDisplay: "0",
@@ -193,7 +203,7 @@ this.handleClear=this.handleClear.bind(this)
 }
 
   handleEight(event) {
-    if (this.state.operated) {
+    if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [8],
      defaultDisplay: "0",
@@ -215,7 +225,7 @@ this.handleClear=this.handleClear.bind(this)
 }
   
   handleNine(event) {
-    if (this.state.operated) {
+    if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [9],
      defaultDisplay: "0",
@@ -236,10 +246,7 @@ this.handleClear=this.handleClear.bind(this)
 }
 
   handleDecimal(event) {
-    // let regex= /((\.(\d+))|((\d+)\.(\d+)))\+|(\-|\*|\/)$/
     let regex= /(\+|\-|\*|\/)$|((\+|\-|\*|\/)\d+)$/
-    let teststring= "0.56-45"
-    console.log(regex.test(teststring))
     if (this.state.operated) {
       this.setState ({
      inputs: ["."],
@@ -414,7 +421,7 @@ this.handleClear=this.handleClear.bind(this)
   inputs: [],
   defaultDisplay: "0",
   runningDisplay: "",
-  currentDisplay: "",
+  currentDisplay: "0",
   operation: "",
   operated: false
     });

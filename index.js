@@ -14,8 +14,8 @@ this.handleZero=this.handleZero.bind(this)
 this.handleOne=this.handleOne.bind(this)
 this.handleTwo=this.handleTwo.bind(this)
 this.handleThree=this.handleThree.bind(this)
-this.handleFour=this.handleThree.bind(this)
-this.handleFive=this.handleThree.bind(this)
+this.handleFour=this.handleFour.bind(this)
+this.handleFive=this.handleFive.bind(this)
 this.handleSix=this.handleSix.bind(this)
 this.handleSeven=this.handleSeven.bind(this)
 this.handleEight=this.handleEight.bind(this)
@@ -247,6 +247,7 @@ this.handleClear=this.handleClear.bind(this)
 
   handleDecimal(event) {
     let regex= /(\+|\-|\*|\/)$|((\+|\-|\*|\/)\d+)$/
+    console.log(this.state.inputs.indexOf("."))
     if (this.state.operated) {
       this.setState ({
      inputs: ["."],

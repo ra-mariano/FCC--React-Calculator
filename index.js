@@ -370,19 +370,24 @@ this.handleClear=this.handleClear.bind(this)
   }
 
   handleDivide(event) {
+    
+    console.log(this.state.operation)
+   //console.log(this.state.inputs.slice(-2))
+   //console.log(this.state.inputs.splice(-2,2))
+   console.log(this.state.inputs)
     if (this.state.inputs[this.state.inputs.length-1]==="/") {
       return
     }
     else if (this.state.inputs[this.state.inputs.length-1]==="*"||
-    this.state.inputs[this.state.inputs.length-1]==="-"||
-    this.state.inputs[this.state.inputs.length-1]==="+"
-    )
+    this.state.inputs[this.state.inputs.length-1]==="-" && Number.isInteger(this.state.inputs[this.state.inputs.length-2])||
+    this.state.inputs[this.state.inputs.length-1]==="+")
      {
+       //console.log(Number.isInteger(this.state.inputs[this.state.inputs.length-2]))
       let operationArr = this.state.operation.split("")
-      console.log(operationArr)
-      console.log(this.state.inputs[this.state.inputs.length-1])
+      //console.log(operationArr)
+      //console.log(this.state.inputs[this.state.inputs.length-1])
       this.state.inputs.pop()
-      this.state.inputs.push(event.target.value)
+      this.state.inputs.push(event.target.value + "condition 2")
       operationArr.pop()
       operationArr.join()
 
@@ -393,10 +398,28 @@ this.handleClear=this.handleClear.bind(this)
       operated: false
     }))
   }
+ else if ((this.state.inputs[this.state.inputs.length-1]==="-" && this.state.inputs[this.state.inputs.length-2]==="*")||
+ (this.state.inputs[this.state.inputs.length-1]==="-" && this.state.inputs[this.state.inputs.length-2]==="+")||
+ (this.state.inputs[this.state.inputs.length-1]==="-" && this.state.inputs[this.state.inputs.length-2]==="/"))
+
+  {
+    let operationArr = this.state.operation.split("")
+    this.state.inputs.splice(-2,2)
+    operationArr.splice(-2,2)
+    operationArr.join()
+    this.state.inputs.push(event.target.value + "condition 3")
+
+  this.setState(state => ({
+    runningDisplay: this.state.inputs,
+    currentDisplay: this.state.inputs,
+    operation: operationArr+event.target.value,
+    operated: false
+  }))
+}
     else { 
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
-      runningDisplay: this.state.inputs,
+      runningDisplay: this.state.inputs +"condition 4",
       currentDisplay: event.target.value,
       operation: state.operation + event.target.value,
       operated: false
@@ -476,21 +499,6 @@ this.handleClear=this.handleClear.bind(this)
       );
     }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   ReactDOM.render(<App />, document.getElementById("app"))

@@ -371,10 +371,10 @@ this.handleClear=this.handleClear.bind(this)
 
   handleDivide(event) {
     
-    console.log(this.state.operation)
+    //console.log(this.state.operation)
    //console.log(this.state.inputs.slice(-2))
    //console.log(this.state.inputs.splice(-2,2))
-   console.log(this.state.inputs)
+   //console.log(this.state.inputs)
     if (this.state.inputs[this.state.inputs.length-1]==="/") {
       return
     }
@@ -417,9 +417,9 @@ this.handleClear=this.handleClear.bind(this)
   }))
 }
     else { 
-    this.state.inputs.push(event.target.value)
-    this.setState(state => ({
-      runningDisplay: this.state.inputs +"condition 4",
+      this.state.inputs.push(event.target.value)
+      this.setState(state => ({
+      runningDisplay: this.state.inputs,
       currentDisplay: event.target.value,
       operation: state.operation + event.target.value,
       operated: false

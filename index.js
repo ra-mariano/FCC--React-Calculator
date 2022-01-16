@@ -460,18 +460,15 @@ else {
     }));
   }
   }
+  
 
   handleDivide(event) {
     
-    //console.log(this.state.operation)
-   //console.log(this.state.inputs.slice(-2))
-   //console.log(this.state.inputs.splice(-2,2))
-   //console.log(this.state.inputs)
     if (this.state.inputs[this.state.inputs.length-1]==="/") {
       return
     }
     else if (this.state.inputs[this.state.inputs.length-1]==="*"||
-    this.state.inputs[this.state.inputs.length-1]==="-" && Number.isInteger(+this.state.inputs[this.state.inputs.length-2])||
+    this.state.inputs[this.state.inputs.length-1]==="-" && Number.isInteger(this.state.inputs[this.state.inputs.length-2])||
     this.state.inputs[this.state.inputs.length-1]==="+")
      {
       let operationArr = this.state.operation.split("")
@@ -525,14 +522,14 @@ else {
      operation: answer,
      runningDisplay: this.state.inputs,
     inputs: [answer],
-    operated: true//If you remove this, the runningDisplay keeps going
+    operated: true
     }));
   }
 
   handleClear() {
     this.setState({
   inputs: [],
-  runningDisplay: "",
+  runningDisplay: "0",
   currentDisplay: "0",
   operation: "",
   operated: false
@@ -541,48 +538,54 @@ else {
 
   render() {
     return (
-      <div>  
-      <h1>{this.state.runningDisplay}</h1>
+      <div id="container">  
+      <div id="calculator">
+        <div id="displayfield">
+      <h1 id="runningdisplay">{this.state.runningDisplay}</h1>
       <h1 id="display">{this.state.currentDisplay}</h1>
-      <button id="zero" value="0" onClick={this.handleZero}>
-        0
-      </button>
-      <button id="one" value="1" onClick={this.handleOne}>
-        1
-      </button>
-      <button id="two" value="2" onClick={this.handleTwo}>
-        2
-      </button>
-      <button id="three" value="3" onClick={this.handleThree}>
-        3
-      </button>
-      <button id="four" value="4" onClick={this.handleFour}>
-        4
-      </button>
-      <button id="five" value="5" onClick={this.handleFive}>
-        5
-      </button>
-      <button id="six" value="6" onClick={this.handleSix}>
-        6
-      </button>
-      <button id="seven" value="7" onClick={this.handleSeven}>
-        7
-      </button>
-      <button id="eight" value="8" onClick={this.handleEight}>
-        8
-      </button>
-      <button id="nine" value="9" onClick={this.handleNine}>
+      </div>
+      <div className="buttonsection">
+      <button className="buttons" id="nine" value="9" onClick={this.handleNine}>
         9
       </button>
-      <button id="decimal" value="." onClick={this.handleDecimal}>
+      <button className="buttons" id="eight" value="8" onClick={this.handleEight}>
+        8
+      </button>
+      <button className="buttons" id="seven" value="7" onClick={this.handleSeven}>
+        7
+      </button>
+      <button className="buttons" id="six" value="6" onClick={this.handleSix}>
+        6
+      </button>
+      <button className="buttons" id="five" value="5" onClick={this.handleFive}>
+        5
+      </button>
+      <button className="buttons" id="four" value="4" onClick={this.handleFour}>
+        4
+      </button>
+      <button className="buttons" id="three" value="3" onClick={this.handleThree}>
+        3
+      </button>
+      <button className="buttons" id="two" value="2" onClick={this.handleTwo}>
+        2
+      </button>
+      <button className="buttons" id="one" value="1" onClick={this.handleOne}>
+        1
+      </button>
+      <button className="buttons" id="decimal" value="." onClick={this.handleDecimal}>
         .
       </button>
-      <button id="add" value="+" onClick={this.handlePlus}>+</button>
-      <button id="subtract" value="-" onClick={this.handleMinus}>-</button>
-      <button id="multiply" value="*" onClick={this.handleMultiply}>*</button>
-      <button id="divide" value="/" onClick={this.handleDivide}>/</button>
-      <button id="equals" onClick={this.handleEquals}>=</button>
-      <button id="clear" onClick={this.handleClear}>Clear All</button>
+      <button className="buttons" id="zero" value="0" onClick={this.handleZero}>
+        0
+      </button>
+      <button className="buttons" id="add" value="+" onClick={this.handlePlus}>+</button>
+      <button className="buttons" id="subtract" value="-" onClick={this.handleMinus}>-</button>
+      <button className="buttons" id="multiply" value="*" onClick={this.handleMultiply}>*</button>
+      <button className="buttons" id="divide" value="/" onClick={this.handleDivide}>/</button>
+      <button className="buttons" id="clear" onClick={this.handleClear}>Clear All</button>
+      <button className="buttons" id="equals" onClick={this.handleEquals}>=</button>
+      </div>
+      </div>
       </div>
       );
     }

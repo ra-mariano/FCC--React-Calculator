@@ -31,7 +31,7 @@ this.handleClear=this.handleClear.bind(this)
 
 
   handleZero(event) {
-    if (this.state.inputs.indexOf("0")>=0||this.state.currentDisplay ==="0") {
+    if (this.state.inputs.indexOf("0")===0 && this.state.inputs.length===1||this.state.currentDisplay ==="0") {
       return
     }
    else if (this.state.operated) {
@@ -43,11 +43,19 @@ this.handleClear=this.handleClear.bind(this)
      operated: false
  });
  }
+ else if (Number.isInteger(+this.state.inputs[this.state.inputs.length-1])||this.state.inputs[this.state.inputs.length-1]===".") {
+  this.state.inputs.push(event.target.value)
+  this.setState(state => ({
+    runningDisplay: this.state.inputs,
+    currentDisplay: state.currentDisplay + event.target.value,
+    operation: state.operation + event.target.value
+  }));
+}
     else {
     this.state.inputs.push(event.target.value)
   this.setState(state => ({
     runningDisplay: this.state.inputs,
-    currentDisplay: state.currentDisplay + event.target.value,
+    currentDisplay: event.target.value,
     operation: state.operation + event.target.value,
   }));
 }
@@ -82,6 +90,7 @@ this.handleClear=this.handleClear.bind(this)
   }
 
   handleTwo(event) {
+    console.log(this.state.operation)
     if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [2],
@@ -95,7 +104,7 @@ this.handleClear=this.handleClear.bind(this)
   this.state.inputs.push(event.target.value)
   this.setState(state => ({
     runningDisplay: this.state.inputs,
-    currentDisplay: state.currentDisplay + event.target.value,
+    currentDisplay: state.currentDisplay + event.target.value +"first",
     operation: state.operation + event.target.value
   }));
 }
@@ -103,7 +112,7 @@ else {
   this.state.inputs.push(event.target.value)
   this.setState(state => ({
     runningDisplay: this.state.inputs,
-    currentDisplay: event.target.value,
+    currentDisplay: event.target.value +"second",
     operation: state.operation + event.target.value
   }));
 }
@@ -138,6 +147,7 @@ else {
 }
 
   handleFour(event) {
+    console.log(this.state.operation)
     if (this.state.operated||this.state.currentDisplay ==="0") {
       this.setState ({
      inputs: [4],
@@ -308,13 +318,13 @@ else {
 }
 
   handleDecimal(event) {
-    let regex= /(\+|\-|\*|\/)$|((\+|\-|\*|\/)\d+)$/
-    console.log(this.state.inputs.indexOf("."))
+    let regex= /(\+|\-|\*|\/)$|((\+|\-|\*|\/)\d+.*)$/
+    console.log(this.state.operation)
     if (this.state.operated) {
       this.setState ({
      inputs: ["."],
-     runningDisplay: ".",
-     currentDisplay: ".",
+     runningDisplay: "0.",
+     currentDisplay: "0.",
      operation: ".",
      operated: false
  });
@@ -324,7 +334,7 @@ else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: state.currentDisplay + event.target.value,
+      currentDisplay: state.currentDisplay + event.target.value +"first",
       operation: state.operation + event.target.value
     }));
   }
@@ -334,7 +344,7 @@ else {
       this.state.inputs.push(event.target.value)
       this.setState(state => ({
         runningDisplay: this.state.inputs,
-        currentDisplay: state.currentDisplay + event.target.value,
+        currentDisplay: state.currentDisplay + event.target.value +"second",
         operation: state.operation + event.target.value
       }));
     }
@@ -350,18 +360,18 @@ else {
     }
     else if (this.state.inputs[this.state.inputs.length-1]==="*"||
     this.state.inputs[this.state.inputs.length-1]==="-" && Number.isInteger(+this.state.inputs[this.state.inputs.length-2])||
-    this.state.inputs[this.state.inputs.length-1]==="+")
+    this.state.inputs[this.state.inputs.length-1]==="/")
      {
       let operationArr = this.state.operation.split("")
       this.state.inputs.pop()
       this.state.inputs.push(event.target.value)
       operationArr.pop()
-      operationArr.join()
+      operationArr.join("")
 
     this.setState(state => ({
       runningDisplay: this.state.inputs,
       currentDisplay: event.target.value,
-      operation: operationArr+event.target.value,
+      operation: operationArr.join("")+event.target.value,
       operated: false
     }))
   }
@@ -373,7 +383,7 @@ else {
     let operationArr = this.state.operation.split("")
     this.state.inputs.splice(-2,2)
     operationArr.splice(-2,2)
-    operationArr.join()
+    operationArr.join('')
     this.state.inputs.push(event.target.value)
 
   this.setState(state => ({
@@ -411,6 +421,7 @@ else {
 }
 
   handleMultiply(event) {
+    console.log(this.state.operation)
     if (this.state.inputs[this.state.inputs.length-1]==="*") {
       return
     }
@@ -422,13 +433,13 @@ else {
       let operationArr = this.state.operation.split("")
       this.state.inputs.pop()
       this.state.inputs.push(event.target.value)
-      operationArr.pop()
-      operationArr.join()
+      console.log(operationArr.pop())
+     
 
     this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: event.target.value,
-      operation: operationArr+event.target.value,
+      currentDisplay: event.target.value+"first",
+      operation: operationArr.join("")+event.target.value,
       operated: false
     }))
   }
@@ -440,12 +451,12 @@ else {
     let operationArr = this.state.operation.split("")
     this.state.inputs.splice(-2,2)
     operationArr.splice(-2,2)
-    operationArr.join()
+    operationArr.join('')
     this.state.inputs.push(event.target.value)
 
   this.setState(state => ({
     runningDisplay: this.state.inputs,
-    currentDisplay: event.target.value,
+    currentDisplay: event.target.value +"second",
     operation: operationArr+event.target.value,
     operated: false
   }))
@@ -454,7 +465,7 @@ else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: event.target.value,
+      currentDisplay: event.target.value +"third",
       operation: state.operation + event.target.value,
       operated: false
     }));
@@ -463,24 +474,24 @@ else {
   
 
   handleDivide(event) {
-    
+    console.log(this.state.operation)
     if (this.state.inputs[this.state.inputs.length-1]==="/") {
       return
     }
     else if (this.state.inputs[this.state.inputs.length-1]==="*"||
-    this.state.inputs[this.state.inputs.length-1]==="-" && Number.isInteger(this.state.inputs[this.state.inputs.length-2])||
+    this.state.inputs[this.state.inputs.length-1]==="-" && Number.isInteger(+this.state.inputs[this.state.inputs.length-2])||
     this.state.inputs[this.state.inputs.length-1]==="+")
      {
       let operationArr = this.state.operation.split("")
       this.state.inputs.pop()
       this.state.inputs.push(event.target.value)
       operationArr.pop()
-      operationArr.join()
+      operationArr.join('')
 
     this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: event.target.value,
-      operation: operationArr+event.target.value,
+      currentDisplay: event.target.value+ "first",
+      operation: operationArr.join("")+event.target.value,
       operated: false
     }))
   }
@@ -492,12 +503,12 @@ else {
     let operationArr = this.state.operation.split("")
     this.state.inputs.splice(-2,2)
     operationArr.splice(-2,2)
-    operationArr.join()
+    operationArr.join('')
     this.state.inputs.push(event.target.value)
 
   this.setState(state => ({
     runningDisplay: this.state.inputs,
-    currentDisplay: event.target.value,
+    currentDisplay: event.target.value+"second",
     operation: operationArr+event.target.value,
     operated: false
   }))
@@ -506,7 +517,7 @@ else {
       this.state.inputs.push(event.target.value)
       this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: event.target.value,
+      currentDisplay: event.target.value+"third",
       operation: state.operation + event.target.value,
       operated: false
     }));
@@ -514,14 +525,14 @@ else {
   }
 
   handleEquals(){
+    console.log(this.state.operation)
    let answer = eval(this.state.operation)
    this.state.inputs.push("=",answer)
-   console.log(answer)
     this.setState(state => ({
      currentDisplay: answer,
      operation: answer,
      runningDisplay: this.state.inputs,
-    inputs: [answer],
+    //inputs: [answer], //removed this cause I believe it's unncessary
     operated: true
     }));
   }
@@ -582,7 +593,7 @@ else {
       <button className="buttons" id="subtract" value="-" onClick={this.handleMinus}>-</button>
       <button className="buttons" id="multiply" value="*" onClick={this.handleMultiply}>*</button>
       <button className="buttons" id="divide" value="/" onClick={this.handleDivide}>/</button>
-      <button className="buttons" id="clear" onClick={this.handleClear}>Clear All</button>
+      <button className="buttons" id="clear" onClick={this.handleClear}>CLEAR</button>
       <button className="buttons" id="equals" onClick={this.handleEquals}>=</button>
       </div>
       </div>

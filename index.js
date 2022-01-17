@@ -104,7 +104,7 @@ this.handleClear=this.handleClear.bind(this)
   this.state.inputs.push(event.target.value)
   this.setState(state => ({
     runningDisplay: this.state.inputs,
-    currentDisplay: state.currentDisplay + event.target.value +"first",
+    currentDisplay: state.currentDisplay + event.target.value,
     operation: state.operation + event.target.value
   }));
 }
@@ -112,7 +112,7 @@ else {
   this.state.inputs.push(event.target.value)
   this.setState(state => ({
     runningDisplay: this.state.inputs,
-    currentDisplay: event.target.value +"second",
+    currentDisplay: event.target.value,
     operation: state.operation + event.target.value
   }));
 }
@@ -334,7 +334,7 @@ else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: state.currentDisplay + event.target.value +"first",
+      currentDisplay: state.currentDisplay + event.target.value,
       operation: state.operation + event.target.value
     }));
   }
@@ -344,7 +344,7 @@ else {
       this.state.inputs.push(event.target.value)
       this.setState(state => ({
         runningDisplay: this.state.inputs,
-        currentDisplay: state.currentDisplay + event.target.value +"second",
+        currentDisplay: state.currentDisplay + event.target.value,
         operation: state.operation + event.target.value
       }));
     }
@@ -389,7 +389,7 @@ else {
   this.setState(state => ({
     runningDisplay: this.state.inputs,
     currentDisplay: event.target.value,
-    operation: operationArr+event.target.value,
+    operation: operationArr.join("")+event.target.value,
     operated: false
   }))
 }
@@ -438,7 +438,7 @@ else {
 
     this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: event.target.value+"first",
+      currentDisplay: event.target.value,
       operation: operationArr.join("")+event.target.value,
       operated: false
     }))
@@ -456,8 +456,8 @@ else {
 
   this.setState(state => ({
     runningDisplay: this.state.inputs,
-    currentDisplay: event.target.value +"second",
-    operation: operationArr+event.target.value,
+    currentDisplay: event.target.value,
+    operation: operationArr.join("")+event.target.value,
     operated: false
   }))
 }
@@ -465,7 +465,7 @@ else {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: event.target.value +"third",
+      currentDisplay: event.target.value,
       operation: state.operation + event.target.value,
       operated: false
     }));
@@ -490,7 +490,7 @@ else {
 
     this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: event.target.value+ "first",
+      currentDisplay: event.target.value,
       operation: operationArr.join("")+event.target.value,
       operated: false
     }))
@@ -508,8 +508,8 @@ else {
 
   this.setState(state => ({
     runningDisplay: this.state.inputs,
-    currentDisplay: event.target.value+"second",
-    operation: operationArr+event.target.value,
+    currentDisplay: event.target.value,
+    operation: operationArr.join('')+event.target.value,
     operated: false
   }))
 }
@@ -517,7 +517,7 @@ else {
       this.state.inputs.push(event.target.value)
       this.setState(state => ({
       runningDisplay: this.state.inputs,
-      currentDisplay: event.target.value+"third",
+      currentDisplay: event.target.value,
       operation: state.operation + event.target.value,
       operated: false
     }));

@@ -65,6 +65,10 @@
   border-radius: 2px;
 }
 
+#zero, #one, #two, #three, #four, #five, #six, #seven, #eight, #nine {
+  background-color: rgb(194, 194, 194);
+}
+
 #clear {
   grid-area: clear;
   background-color: rgb(243, 90, 29) 

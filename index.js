@@ -318,19 +318,20 @@ else {
 }
 
   handleDecimal(event) {
-    let regex= /(\+|\-|\*|\/)$|((\+|\-|\*|\/)\d+.*)$/
+    let regex= /(\+|\-|\*|\/)$|((\+|\-|\*|\/)\d+)$/
     console.log(this.state.operation)
     if (this.state.operated) {
       this.setState ({
-     inputs: ["."],
+     inputs: ["0."],
      runningDisplay: "0.",
      currentDisplay: "0.",
      operation: ".",
      operated: false
  });
  }
-   else {
-    if (this.state.inputs.indexOf(".")<0) {
+
+   else if 
+  (this.state.inputs.indexOf(".")<0) {
     this.state.inputs.push(event.target.value)
     this.setState(state => ({
       runningDisplay: this.state.inputs,
@@ -338,7 +339,7 @@ else {
       operation: state.operation + event.target.value
     }));
   }
-  else if (this.state.inputs.indexOf(".")>0)  {
+  else if (this.state.inputs.indexOf(".")>=0)  {
    
     if(regex.test(this.state.operation)) {
       this.state.inputs.push(event.target.value)
@@ -352,7 +353,7 @@ else {
   }
   else return
   }
-}
+
 
   handlePlus(event) {
     if (this.state.inputs[this.state.inputs.length-1]==="+") {
@@ -539,7 +540,7 @@ else {
 
   handleClear() {
     this.setState({
-  inputs: [],
+  inputs: [0],
   runningDisplay: "0",
   currentDisplay: "0",
   operation: "",

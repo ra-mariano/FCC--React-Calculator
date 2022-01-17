@@ -9,7 +9,7 @@
 }
 
 #calculator {
-  width: 370px;
+  width: 360px;
   margin: auto;
   background-color: white;
   overflow: hidden;
@@ -44,7 +44,7 @@
   height: 400px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 2px;
+  grid-gap: 7px;
   grid-template-areas: 
   "nine eight seven"
   "six five four"
